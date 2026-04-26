@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flashcards · GEM1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="logo">GEM<span>1</span> Study Platform</div>
+  </header>
+  <nav class="sidebar">
+    <div class="sidebar-section">Study</div>
+    <a href="index.html"><span class="icon">⊞</span> Dashboard</a>
+    <a href="quiz.html"><span class="icon">❓</span> Daily Quiz</a>
+    <a href="flashcards.html" class="active"><span class="icon">🗂</span> Flashcards</a>
+    <a href="exam.html"><span class="icon">📝</span> Mock Exam</a>
+  </nav>
+  <main class="main" id="fc-root">
+    <h1>Flashcard Review</h1>
+    <p class="subtitle">Loading…</p>
+  </main>
+</div>
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/flashcards.js"></script>
+</body>
+</html>

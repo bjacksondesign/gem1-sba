@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEM1 Study Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="logo">GEM<span>1</span> Study Platform</div>
+    <button class="btn btn-outline" onclick="openImportModal('questions')" style="font-size:13px;padding:6px 14px">
+      ⬆ Import Questions
+    </button>
+    <button class="btn btn-outline" onclick="openImportModal('flashcards')" style="font-size:13px;padding:6px 14px;margin-left:8px">
+      ⬆ Import Flashcards
+    </button>
+  </header>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-section">Study</div>
+    <a href="index.html" class="active">
+      <span class="icon">⊞</span> Dashboard
+    </a>
+    <a href="quiz.html">
+      <span class="icon">❓</span> Daily Quiz
+    </a>
+    <a href="flashcards.html">
+      <span class="icon">🗂</span> Flashcards
+    </a>
+    <a href="exam.html">
+      <span class="icon">📝</span> Mock Exam
+    </a>
+    <div class="sidebar-section" style="margin-top:16px">Data</div>
+    <a href="#" onclick="if(confirm('Reset ALL progress? This cannot be undone.')){clearAllData();location.reload();}return false;">
+      <span class="icon">↺</span> Reset Progress
+    </a>
+  </nav>
+
+  <!-- Main content -->
+  <main class="main">
+    <h1>Dashboard</h1>
+    <p class="subtitle" id="greeting">Good to see you. Here's where you stand.</p>
+
+    <!-- Stat tiles -->
+    <div class="stats-grid">
+      <div class="stat-tile green">
+        <div class="value" id="stat-overall">—</div>
+        <div class="label">Overall score</div>
+      </div>
+      <div class="stat-tile amber">
+        <div class="value" id="stat-streak">0</div>
+        <div class="label">Day streak 🔥</div>
+      </div>
+      <div class="stat-tile blue">
+        <div class="value" id="stat-due-q">—</div>
+        <div class="label">Questions due today</div>
+      </div>
+      <div class="stat-tile purple">
+        <div class="value" id="stat-due-fc">—</div>
+        <div class="label">Flashcards due today</div>
+      </div>
+      <div class="stat-tile">
+        <div class="value" id="stat-answered">0</div>
+        <div class="label">Questions answered</div>
+      </div>
+      <div class="stat-tile">
+        <div class="value" id="stat-exams">0</div>
+        <div class="label">Exams completed</div>
+      </div>
+    </div>
+
+    <!-- Quick-launch -->
+    <h2>Start Studying</h2>
+    <div class="launch-grid">
+      <a class="launch-btn" href="quiz.html">
+        <div class="btn-icon">❓</div>
+        <div class="btn-title">Daily Adaptive Quiz</div>
+        <div class="btn-sub">SBAs weighted by your weak topics</div>
+      </a>
+      <a class="launch-btn" href="flashcards.html">
+        <div class="btn-icon">🗂</div>
+        <div class="btn-title">Flashcard Review</div>
+        <div class="btn-sub">Spaced repetition · <span id="fc-due-inline">—</span> due</div>
+      </a>
+      <a class="launch-btn" href="exam.html">
+        <div class="btn-icon">📝</div>
+        <div class="btn-title">Timed Mock Exam</div>
+        <div class="btn-sub">Full paper · 2 min per question</div>
+      </a>
+      <div class="launch-btn" style="cursor:default;opacity:.6">
+        <div class="btn-icon">📊</div>
+        <div class="btn-title">Progress Report</div>
+        <div class="btn-sub">Coming soon</div>
+      </div>
+    </div>
+
+    <!-- Topic table + activity -->
+    <div class="section-row">
+
+      <!-- Topic performance -->
+      <div class="card">
+        <div class="card-title">Performance by topic</div>
+        <table class="topic-table">
+          <thead>
+            <tr>
+              <th>Topic</th>
+              <th>Qs</th>
+              <th style="min-width:200px">Score</th>
+              <th>Attempted</th>
+            </tr>
+          </thead>
+          <tbody id="topic-tbody">
+            <tr><td colspan="4" class="empty-state">No data yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Right column -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+
+        <!-- Activity feed -->
+        <div class="card">
+          <div class="card-title">Recent activity</div>
+          <div id="activity-list" class="activity-list">
+            <div class="empty-state">
+              <div class="empty-icon">📚</div>
+              No activity yet.
+            </div>
+          </div>
+        </div>
+
+        <!-- Import hint card (visible until data loaded) -->
+        <div class="card" id="import-hint-card">
+          <div class="card-title">Getting started</div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:14px">
+            No questions loaded yet. Paste your JSON data to get started.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn btn-primary" onclick="openImportModal('questions')">
+              ⬆ Import 114 Questions
+            </button>
+            <button class="btn btn-outline" onclick="openImportModal('flashcards')">
+              ⬆ Import 116 Flashcards
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Import modal -->
+<div class="modal-backdrop hidden" id="import-modal">
+  <div class="modal">
+    <h2>Import Data</h2>
+    <p>Paste a JSON array of <span id="import-type-label">items</span> below.</p>
+    <input type="hidden" id="import-type" value="questions" />
+    <textarea id="import-textarea" placeholder='[{"id":"q001","topic":"Cardiology","stem":"...","options":{...},"answer":"A","explanation":"..."}]'></textarea>
+    <div class="error-msg" id="import-error"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeImportModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="runImport()">Import</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+  // Greeting
+  const hr = new Date().getHours();
+  const greet = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
+  document.getElementById('greeting').textContent = `${greet}. Here's where you stand.`;
+
+  // Sync fc-due-inline after storage loads
+  document.addEventListener('DOMContentLoaded', () => {
+    const due = countDueFlashcards(FLASHCARDS);
+    document.getElementById('fc-due-inline').textContent = due;
+
+    // Hide import hint if data is already loaded
+    if (QUESTIONS.length > 0) {
+      const hint = document.getElementById('import-hint-card');
+      if (hint) hint.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
