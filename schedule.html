@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>18-Day Plan · GEM1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="logo">GEM<span>1</span> Study Platform</div>
+  </header>
+  <nav class="sidebar">
+    <div class="sidebar-section">Study</div>
+    <a href="index.html"><span class="icon">⊞</span> Dashboard</a>
+    <a href="quiz.html"><span class="icon">❓</span> Daily Quiz</a>
+    <a href="flashcards.html"><span class="icon">🗂</span> Flashcards</a>
+    <a href="exam.html"><span class="icon">📝</span> Mock Exam</a>
+    <a href="schedule.html" class="active"><span class="icon">📅</span> 18-Day Plan</a>
+  </nav>
+  <main class="main">
+    <h1>18-Day Study Plan</h1>
+    <p class="subtitle" id="plan-subtitle">Exam: <strong>May 15, 2026</strong> · Loading…</p>
+
+    <div class="stats-grid" style="margin-bottom:28px">
+      <div class="stat-tile blue">
+        <div class="value" id="days-remaining">—</div>
+        <div class="label">Days remaining</div>
+      </div>
+      <div class="stat-tile green">
+        <div class="value" id="days-complete">0</div>
+        <div class="label">Days completed</div>
+      </div>
+      <div class="stat-tile yellow">
+        <div class="value" id="plan-streak">0</div>
+        <div class="label">Day streak 🔥</div>
+      </div>
+    </div>
+
+    <div class="schedule-grid" id="schedule-grid"></div>
+
+    <div id="day-detail" style="display:none" class="card">
+      <div id="day-detail-inner"></div>
+    </div>
+  </main>
+</div>
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/schedule.js"></script>
+</body>
+</html>

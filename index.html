@@ -5,57 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GEM1 Study Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-
 <div class="app-shell">
 
-  <!-- Top bar -->
   <header class="topbar">
-    <div class="logo">GEM<span>1</span> Study Platform</div>
-    <button class="btn btn-outline" onclick="openImportModal('questions')" style="font-size:13px;padding:6px 14px">
-      ⬆ Import Questions
-    </button>
-    <button class="btn btn-outline" onclick="openImportModal('flashcards')" style="font-size:13px;padding:6px 14px;margin-left:8px">
-      ⬆ Import Flashcards
-    </button>
+    <div class="logo">GEM<span>1</span> Study Platform <span>May 15 Exam Prep</span></div>
+    <button class="btn btn-outline btn-sm" onclick="openImportModal('questions')">⬆ Import Questions</button>
+    <button class="btn btn-outline btn-sm" style="margin-left:8px" onclick="openImportModal('flashcards')">⬆ Import Flashcards</button>
   </header>
 
-  <!-- Sidebar -->
   <nav class="sidebar">
     <div class="sidebar-section">Study</div>
-    <a href="index.html" class="active">
-      <span class="icon">⊞</span> Dashboard
-    </a>
-    <a href="quiz.html">
-      <span class="icon">❓</span> Daily Quiz
-    </a>
-    <a href="flashcards.html">
-      <span class="icon">🗂</span> Flashcards
-    </a>
-    <a href="exam.html">
-      <span class="icon">📝</span> Mock Exam
-    </a>
-    <div class="sidebar-section" style="margin-top:16px">Data</div>
+    <a href="index.html" class="active"><span class="icon">⊞</span> Dashboard</a>
+    <a href="quiz.html"><span class="icon">❓</span> Daily Quiz</a>
+    <a href="flashcards.html"><span class="icon">🗂</span> Flashcards</a>
+    <a href="exam.html"><span class="icon">📝</span> Mock Exam</a>
+    <a href="schedule.html"><span class="icon">📅</span> 18-Day Plan</a>
+    <div class="sidebar-section" style="margin-top:16px">Settings</div>
     <a href="#" onclick="if(confirm('Reset ALL progress? This cannot be undone.')){clearAllData();location.reload();}return false;">
       <span class="icon">↺</span> Reset Progress
     </a>
   </nav>
 
-  <!-- Main content -->
   <main class="main">
     <h1>Dashboard</h1>
-    <p class="subtitle" id="greeting">Good to see you. Here's where you stand.</p>
+    <p class="subtitle" id="greeting">Good to see you.</p>
 
-    <!-- Stat tiles -->
     <div class="stats-grid">
       <div class="stat-tile green">
         <div class="value" id="stat-overall">—</div>
         <div class="label">Overall score</div>
       </div>
-      <div class="stat-tile amber">
+      <div class="stat-tile yellow">
         <div class="value" id="stat-streak">0</div>
         <div class="label">Day streak 🔥</div>
       </div>
@@ -63,49 +47,45 @@
         <div class="value" id="stat-due-q">—</div>
         <div class="label">Questions due today</div>
       </div>
-      <div class="stat-tile purple">
-        <div class="value" id="stat-due-fc">—</div>
+      <div class="stat-tile" style="--value-color:var(--accent2)">
+        <div class="value" id="stat-due-fc" style="color:var(--accent2)">—</div>
         <div class="label">Flashcards due today</div>
       </div>
       <div class="stat-tile">
-        <div class="value" id="stat-answered">0</div>
+        <div class="value mono" id="stat-answered">0</div>
         <div class="label">Questions answered</div>
       </div>
       <div class="stat-tile">
-        <div class="value" id="stat-exams">0</div>
+        <div class="value mono" id="stat-exams">0</div>
         <div class="label">Exams completed</div>
       </div>
     </div>
 
-    <!-- Quick-launch -->
     <h2>Start Studying</h2>
     <div class="launch-grid">
       <a class="launch-btn" href="quiz.html">
         <div class="btn-icon">❓</div>
         <div class="btn-title">Daily Adaptive Quiz</div>
-        <div class="btn-sub">SBAs weighted by your weak topics</div>
+        <div class="btn-sub">SBAs weighted to your weak topics</div>
       </a>
       <a class="launch-btn" href="flashcards.html">
         <div class="btn-icon">🗂</div>
         <div class="btn-title">Flashcard Review</div>
-        <div class="btn-sub">Spaced repetition · <span id="fc-due-inline">—</span> due</div>
+        <div class="btn-sub">Spaced repetition · <span id="fc-due-inline">—</span> due today</div>
       </a>
       <a class="launch-btn" href="exam.html">
         <div class="btn-icon">📝</div>
         <div class="btn-title">Timed Mock Exam</div>
-        <div class="btn-sub">Full paper · 2 min per question</div>
+        <div class="btn-sub">Full paper · 90 sec per question</div>
       </a>
-      <div class="launch-btn" style="cursor:default;opacity:.6">
-        <div class="btn-icon">📊</div>
-        <div class="btn-title">Progress Report</div>
-        <div class="btn-sub">Coming soon</div>
-      </div>
+      <a class="launch-btn" href="schedule.html">
+        <div class="btn-icon">📅</div>
+        <div class="btn-title">18-Day Study Plan</div>
+        <div class="btn-sub">Structured path to May 15</div>
+      </a>
     </div>
 
-    <!-- Topic table + activity -->
     <div class="section-row">
-
-      <!-- Topic performance -->
       <div class="card">
         <div class="card-title">Performance by topic</div>
         <table class="topic-table">
@@ -113,46 +93,34 @@
             <tr>
               <th>Topic</th>
               <th>Qs</th>
-              <th style="min-width:200px">Score</th>
+              <th style="min-width:180px">Score</th>
               <th>Attempted</th>
             </tr>
           </thead>
           <tbody id="topic-tbody">
-            <tr><td colspan="4" class="empty-state">No data yet.</td></tr>
+            <tr><td colspan="4" class="empty-state" style="padding:20px 0">Complete your first quiz to see topic stats.</td></tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Right column -->
-      <div style="display:flex;flex-direction:column;gap:16px">
-
-        <!-- Activity feed -->
+      <div style="display:flex;flex-direction:column;gap:14px">
         <div class="card">
           <div class="card-title">Recent activity</div>
           <div id="activity-list" class="activity-list">
-            <div class="empty-state">
-              <div class="empty-icon">📚</div>
-              No activity yet.
-            </div>
+            <div class="empty-state" style="padding:16px 0;font-size:13px">No activity yet.</div>
           </div>
         </div>
 
-        <!-- Import hint card (visible until data loaded) -->
-        <div class="card" id="import-hint-card">
+        <div class="card" id="import-hint">
           <div class="card-title">Getting started</div>
           <p style="font-size:13px;color:var(--muted);margin-bottom:14px">
-            No questions loaded yet. Paste your JSON data to get started.
+            <strong style="color:var(--text)">104 questions</strong> and <strong style="color:var(--text)">116 flashcards</strong> are loaded and ready. Start with the Daily Quiz or import additional content below.
           </p>
           <div style="display:flex;flex-direction:column;gap:8px">
-            <button class="btn btn-primary" onclick="openImportModal('questions')">
-              ⬆ Import 114 Questions
-            </button>
-            <button class="btn btn-outline" onclick="openImportModal('flashcards')">
-              ⬆ Import 116 Flashcards
-            </button>
+            <button class="btn btn-primary btn-sm" onclick="openImportModal('questions')">⬆ Import more questions</button>
+            <button class="btn btn-outline btn-sm" onclick="openImportModal('flashcards')">⬆ Import more flashcards</button>
           </div>
         </div>
-
       </div>
     </div>
   </main>
@@ -162,13 +130,13 @@
 <div class="modal-backdrop hidden" id="import-modal">
   <div class="modal">
     <h2>Import Data</h2>
-    <p>Paste a JSON array of <span id="import-type-label">items</span> below.</p>
+    <p>Paste a JSON array of <span id="import-type-label">items</span>.</p>
     <input type="hidden" id="import-type" value="questions" />
-    <textarea id="import-textarea" placeholder='[{"id":"q001","topic":"Cardiology","stem":"...","options":{...},"answer":"A","explanation":"..."}]'></textarea>
+    <textarea id="import-textarea" placeholder='[{"id":"q001","topic":"Cardiology","stem":"...","options":{"A":"...","B":"...","C":"...","D":"...","E":"..."},"answer":"A","explanation":"..."}]'></textarea>
     <div class="error-msg" id="import-error"></div>
     <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeImportModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="runImport()">Import</button>
+      <button class="btn btn-outline btn-sm" onclick="closeImportModal()">Cancel</button>
+      <button class="btn btn-primary btn-sm" onclick="runImport()">Import</button>
     </div>
   </div>
 </div>
@@ -177,23 +145,13 @@
 <script src="js/storage.js"></script>
 <script src="js/dashboard.js"></script>
 <script>
-  // Greeting
   const hr = new Date().getHours();
   const greet = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
-  document.getElementById('greeting').textContent = `${greet}. Here's where you stand.`;
+  document.getElementById('greeting').textContent = greet + '. Here\'s where you stand.';
 
-  // Sync fc-due-inline after storage loads
   document.addEventListener('DOMContentLoaded', () => {
-    const due = countDueFlashcards(FLASHCARDS);
-    document.getElementById('fc-due-inline').textContent = due;
-
-    // Hide import hint if data is already loaded
-    if (QUESTIONS.length > 0) {
-      const hint = document.getElementById('import-hint-card');
-      if (hint) hint.style.display = 'none';
-    }
+    document.getElementById('fc-due-inline').textContent = countDueFlashcards(FLASHCARDS);
   });
 </script>
-
 </body>
 </html>

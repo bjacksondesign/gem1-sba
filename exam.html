@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mock Exam · GEM1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 <div class="app-shell">
   <header class="topbar">
-    <div class="logo">GEM<span>1</span> Study Platform</div>
+    <div class="logo">GEM<span>1</span> Study Platform <span>May 15 Exam Prep</span></div>
+    <a href="index.html" class="btn btn-outline btn-sm">← Dashboard</a>
   </header>
   <nav class="sidebar">
     <div class="sidebar-section">Study</div>
@@ -19,14 +20,13 @@
     <a href="quiz.html"><span class="icon">❓</span> Daily Quiz</a>
     <a href="flashcards.html"><span class="icon">🗂</span> Flashcards</a>
     <a href="exam.html" class="active"><span class="icon">📝</span> Mock Exam</a>
+    <a href="schedule.html"><span class="icon">📅</span> 18-Day Plan</a>
   </nav>
-  <main class="main" id="exam-root">
-    <h1>Timed Mock Exam</h1>
-    <p class="subtitle">Loading…</p>
-  </main>
+  <main class="main" id="exam-root"></main>
 </div>
 <script src="js/data.js"></script>
 <script src="js/storage.js"></script>
+<script src="js/resources.js"></script>
 <script src="js/exam.js"></script>
 </body>
 </html>
